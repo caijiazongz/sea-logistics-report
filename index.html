@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
@@ -864,7 +864,7 @@ body {
 <!-- Nav -->
 <nav class="nav">
   <div class="nav-inner">
-    <button class="nav-btn active" onclick="showSection('s0')" id="nav-s0">执行摘要</button>
+    <button class="nav-btn" onclick="showSection('s0')" id="nav-s0">执行摘要</button>
 <button class="nav-btn" onclick="showSection('s1')" id="nav-s1">市场总览</button>
 <button class="nav-btn" onclick="showSection('s2')" id="nav-s2">十五五规划机遇</button>
 <button class="nav-btn" onclick="showSection('s3')" id="nav-s3">PESTEL分析</button>
@@ -881,40 +881,40 @@ body {
 
 <!-- Sections -->
 
-<div id="s0" class="section active" data-was="1">
+<div id="s0" class="section">
 <div class="container">
   <p class="section-title">执行摘要</p>
 
   <div class="kpi-grid">
     <div class="kpi-card">
       <div class="kpi-label">2024年中国—东盟贸易总值（人民币）</div>
-      <div class="kpi-value">7.55万亿</div>
-      <div class="kpi-change up">▲ 同比+8.0%</div>
+      <div class="kpi-value">6.99万亿</div>
+      <div class="kpi-change up">▲ 同比+9.0%</div>
     </div>
     <div class="kpi-card">
       <div class="kpi-label">2024年中国—东盟贸易总值（美元）</div>
-      <div class="kpi-value">1.05万亿$</div>
-      <div class="kpi-change up">▲ 首破万亿关口 +7.4%</div>
+      <div class="kpi-value">9,823亿$</div>
+      <div class="kpi-change up">▲ 同比+7.8%</div>
     </div>
     <div class="kpi-card">
       <div class="kpi-label">中国对东盟出口额（美元）</div>
-      <div class="kpi-value">6,652亿$</div>
-      <div class="kpi-change up">▲ 同比+13.4%</div>
+      <div class="kpi-value">5,865亿$</div>
+      <div class="kpi-change up">▲ 同比+12.0%</div>
     </div>
     <div class="kpi-card">
       <div class="kpi-label">2024年跨境电商进出口总额（中国）</div>
-      <div class="kpi-value">2.75万亿</div>
-      <div class="kpi-change up">▲ 同比+4.6%</div>
+      <div class="kpi-value">2.63万亿</div>
+      <div class="kpi-change up">▲ 同比+10.8%</div>
     </div>
     <div class="kpi-card">
       <div class="kpi-label">东南亚物流市场规模（2025E）</div>
-      <div class="kpi-value">1,576亿$</div>
-      <div class="kpi-change up">▲ 同比+22.8%</div>
+      <div class="kpi-value">~2,200亿$</div>
+      <div class="kpi-change up">▲ CAGR ~8%</div>
     </div>
     <div class="kpi-card">
       <div class="kpi-label">十五五规划物流成本目标（占GDP）</div>
-      <div class="kpi-value">13.9%</div>
-      <div class="kpi-change">▼ 首破14% 历史最低</div>
+      <div class="kpi-value">-1.0~1.5pp</div>
+      <div class="kpi-change">2025→2030 降幅目标</div>
     </div>
   </div>
 
@@ -936,7 +936,7 @@ body {
         <ul style="padding-left:1.2rem;font-size:.88rem;color:var(--muted)">
           <li style="margin-bottom:.4rem">地缘政治风险：南海争端及中美博弈影响部分航线稳定性</li>
           <li style="margin-bottom:.4rem">合规成本上升：各国海关数字申报标准不统一</li>
-          <li style="margin-bottom:.4rem">本土竞争加剧：Ninja Van、J&amp;T等本地头部玩家价格战激烈</li>
+          <li style="margin-bottom:.4rem">本土竞争加剧：Ninja Van、J&T等本地头部玩家价格战激烈</li>
           <li style="margin-bottom:.4rem">基础设施短板：印尼、缅甸、菲律宾末端物流覆盖率低</li>
           <li>汇率波动：东南亚多货币环境下的汇兑风险</li>
         </ul>
@@ -973,13 +973,13 @@ body {
 </div>
 </div>
 
-<div id="s1" class="section active" data-was="0">
+<div id="s1" class="section">
 <div class="container">
   <p class="section-title">市场总览</p>
 
   <div class="card">
     <div class="card-title">中国—东盟双边贸易年度趋势（2020—2024）</div>
-    <div class="chart-wrap"><canvas id="chartTrade" width="0" height="0" style="box-sizing: border-box; display: block; height: 0px; width: 0px;"></canvas></div>
+    <div class="chart-wrap"><canvas id="chartTrade" width="800" height="320"></canvas></div>
     <div class="source-box">
       来源：<a href="https://www.gov.cn/lianbo/bumen/202501/content_6998223.htm" target="_blank" style="color:var(--blue)">中华人民共和国海关总署</a>；
       <a href="https://asean.china-mission.gov.cn/stxwx/202501/t20250113_11532245.htm" target="_blank" style="color:var(--blue)">中华人民共和国驻东盟使团贸易快报</a>
@@ -990,12 +990,12 @@ body {
   <div class="grid-2">
     <div class="card">
       <div class="card-title">中国跨境电商进出口规模（2022—2024）</div>
-      <div class="chart-wrap"><canvas id="chartCBEC" width="0" height="0" style="box-sizing: border-box; display: block; height: 0px; width: 0px;"></canvas></div>
+      <div class="chart-wrap"><canvas id="chartCBEC" width="800" height="320"></canvas></div>
       <div class="source-box">来源：<a href="https://www.gov.cn/zhengce/jiedu/tujie/202501/content_6998286.htm" target="_blank" style="color:var(--blue)">商务部跨境电商统计数据（中国政府网）</a>；<a href="https://www.gov.cn/lianbo/bumen/202501/content_6998223.htm" target="_blank" style="color:var(--blue)">海关总署B2C出口数据（2025.01）</a></div>
     </div>
     <div class="card">
       <div class="card-title">东南亚主要国家物流市场规模（2024E，亿美元）</div>
-      <div class="chart-wrap"><canvas id="chartSEALogistics" width="0" height="0" style="box-sizing: border-box; display: block; height: 0px; width: 0px;"></canvas></div>
+      <div class="chart-wrap"><canvas id="chartSEALogistics" width="800" height="320"></canvas></div>
       <div class="source-box">来源：<a href="https://www.mordorintelligence.com/industry-reports/southeast-asia-logistics-market" target="_blank" style="color:var(--blue)">Mordor Intelligence《Southeast Asia Logistics Market 2025》</a>；各国交通部统计年报（估算数据标注E）</div>
     </div>
   </div>
@@ -1007,12 +1007,12 @@ body {
         <th>排名</th><th>国家/地区</th><th>贸易总额(亿$)</th><th>中国出口(亿$)</th><th>中国进口(亿$)</th><th>同比增长</th>
       </tr></thead>
       <tbody>
-        <tr><td>1</td><td>2,900</td><td>1,760</td><td>1,140</td><td>+12%</td><td class="up-val">+11%</td></tr>
-        <tr><td>2</td><td>2,400</td><td>1,160</td><td>1,240</td><td>+10%</td><td class="up-val">+9%</td></tr>
-        <tr><td>3</td><td>1,560</td><td>860</td><td>700</td><td>+8%</td><td class="up-val">+7%</td></tr>
-        <tr><td>4</td><td>1,100</td><td>640</td><td>460</td><td>+9%</td><td class="up-val">+8%</td></tr>
-        <tr><td>5</td><td>620</td><td>420</td><td>200</td><td>+14%</td><td class="up-val">+13%</td></tr>
-        <tr><td>6</td><td>950</td><td>530</td><td>420</td><td>+6%</td><td class="up-val">+5%</td></tr>
+        <tr><td>1</td><td>🇻🇳 越南</td><td>2,600(E)</td><td>1,480(E)</td><td>1,120(E)</td><td class="up-val">+11%</td></tr>
+        <tr><td>2</td><td>🇲🇾 马来西亚</td><td>2,100(E)</td><td>1,020(E)</td><td>1,080(E)</td><td class="up-val">+9%</td></tr>
+        <tr><td>3</td><td>🇮🇩 印度尼西亚</td><td>1,380(E)</td><td>760(E)</td><td>620(E)</td><td class="up-val">+7%</td></tr>
+        <tr><td>4</td><td>🇹🇭 泰国</td><td>980(E)</td><td>560(E)</td><td>420(E)</td><td class="up-val">+8%</td></tr>
+        <tr><td>5</td><td>🇵🇭 菲律宾</td><td>540(E)</td><td>360(E)</td><td>180(E)</td><td class="up-val">+13%</td></tr>
+        <tr><td>6</td><td>🇸🇬 新加坡</td><td>860(E)</td><td>480(E)</td><td>380(E)</td><td class="up-val">+5%</td></tr>
         <tr><td colspan="6" style="font-size:.78rem;color:var(--muted);padding-top:.5rem">
           注：（E）为估算数据，各分项之和应约等于总值9823.4亿美元，具体分国数据以商务部官方发布为准
         </td></tr>
@@ -1025,7 +1025,7 @@ body {
 </div>
 </div>
 
-<div id="s2" class="section active" data-was="0">
+<div id="s2" class="section">
 <div class="container">
   <p class="section-title">十五五规划机遇</p>
 
@@ -1062,7 +1062,7 @@ body {
 
   <div class="card">
     <div class="card-title">物流成本占GDP比率目标趋势</div>
-    <div class="chart-wrap"><canvas id="chartLogCost" width="0" height="0" style="box-sizing: border-box; display: block; height: 0px; width: 0px;"></canvas></div>
+    <div class="chart-wrap"><canvas id="chartLogCost" width="800" height="320"></canvas></div>
     <div class="source-box">
       来源：<a href="https://data.stats.gov.cn" target="_blank" style="color:var(--blue)">国家统计局数据查询</a>；中国物流与采购联合会；十五五规划目标值（2030E）
     </div>
@@ -1085,7 +1085,7 @@ body {
 
   <div class="card">
     <div class="card-title">东南亚跨境电商市场规模预测（2023—2028E，亿美元）</div>
-    <div class="chart-wrap"><canvas id="chartSEACBEC" width="0" height="0" style="box-sizing: border-box; display: block; height: 0px; width: 0px;"></canvas></div>
+    <div class="chart-wrap"><canvas id="chartSEACBEC" width="800" height="320"></canvas></div>
     <div class="source-box">
       来源：<a href="https://economysea.withgoogle.com" target="_blank" style="color:var(--blue)">Google-Temasek-Bain《e-Conomy SEA 2024》</a>；eMarketer《Southeast Asia Ecommerce Forecast 2025》；估算数据标注(E)
     </div>
@@ -1093,7 +1093,7 @@ body {
 </div>
 </div>
 
-<div id="s3" class="section active" data-was="0">
+<div id="s3" class="section">
 <div class="container">
   <p class="section-title">PESTEL分析 — 东南亚跨境物流宏观环境</p>
 
@@ -1124,7 +1124,7 @@ body {
         <h4>S — 社会（Social）</h4>
         <ul>
           <li>东南亚6.7亿人口，中位年龄≤30岁，数字原住民主导消费</li>
-          <li>移动互联网渗透率&gt;80%，社交电商（TikTok Shop）快速增长</li>
+          <li>移动互联网渗透率>80%，社交电商（TikTok Shop）快速增长</li>
           <li>中产消费升级：品牌快消品、电子产品跨境需求旺盛</li>
           <li>劳动力成本低于中国，制造业外迁形成回程物流机遇</li>
           <li>宗教文化差异（印尼、马来西亚 Halal 需求）</li>
@@ -1169,7 +1169,7 @@ body {
 </div>
 </div>
 
-<div id="s4" class="section active" data-was="0">
+<div id="s4" class="section">
 <div class="container">
   <p class="section-title">波特钻石模型 — 东南亚跨境物流竞争优势分析</p>
 
@@ -1214,7 +1214,7 @@ body {
       <div class="diamond-card" style="border-color:#f4a261">
         <h4 style="color:#c2410c">④ 企业战略与竞争</h4>
         <ul>
-          <li>头部：极兔速递（J&amp;T）全东南亚7国覆盖</li>
+          <li>头部：极兔速递（J&T）全东南亚7国覆盖</li>
           <li>顺丰国际：高端快递+B2B货运布局</li>
           <li>菜鸟国际：阿里生态+海外仓一体化</li>
           <li>本土竞争：Ninja Van、Gojek Logistics</li>
@@ -1250,7 +1250,7 @@ body {
 </div>
 </div>
 
-<div id="s5" class="section active" data-was="0">
+<div id="s5" class="section">
 <div class="container">
   <p class="section-title">SWOT分析 — 中资跨境物流企业布局东南亚</p>
 
@@ -1293,7 +1293,7 @@ body {
       <div class="swot-card swot-T">
         <h4>T — 威胁（Threats）</h4>
         <ul>
-          <li>J&amp;T（极兔）、Ninja Van价格战拖低行业利润率</li>
+          <li>J&T（极兔）、Ninja Van价格战拖低行业利润率</li>
           <li>地缘政治风险：南海、台海形势不确定性</li>
           <li>各国数据本地化要求与中国数据出境规定冲突</li>
           <li>东南亚本土物流平台获取大量外资融资反攻</li>
@@ -1310,7 +1310,7 @@ body {
       <thead><tr><th>战略类型</th><th>核心策略</th><th>优先级</th></tr></thead>
       <tbody>
         <tr><td><strong>SO增长型</strong></td><td>以中国供应链优势+RCEP政策红利，加速在越南、泰国、印尼建设自营海外仓，打造"仓内直播+DTC出口"一体化服务</td><td class="up-val">★★★ 高</td></tr>
-        <tr><td><strong>WO转型型</strong></td><td>与本土物流企业合资/战略入股，补足末端配送能力，降低本地化风险（如J&amp;T模式参考）</td><td class="up-val">★★★ 高</td></tr>
+        <tr><td><strong>WO转型型</strong></td><td>与本土物流企业合资/战略入股，补足末端配送能力，降低本地化风险（如J&T模式参考）</td><td class="up-val">★★★ 高</td></tr>
         <tr><td><strong>ST防御型</strong></td><td>布局高价值、低价格战的赛道（医药冷链、新能源配件、B2B大件）而非大打价格战</td><td style="color:var(--muted)">★★ 中</td></tr>
         <tr><td><strong>WT收缩型</strong></td><td>在政策限制多、基础设施薄弱市场（缅甸、柬埔寨）采取轻资产合作模式，规避直接投资风险</td><td style="color:var(--muted)">★★ 中</td></tr>
       </tbody>
@@ -1320,7 +1320,7 @@ body {
 </div>
 </div>
 
-<div id="s6" class="section active" data-was="0">
+<div id="s6" class="section">
 <div class="container">
   <p class="section-title">国家专题 — 东南亚六大核心市场</p>
 
@@ -1418,7 +1418,7 @@ body {
 
   <div class="card" style="margin-top:1.5rem">
     <div class="card-title">东南亚国家物流机会评分（综合评级）</div>
-    <div class="chart-wrap"><canvas id="chartCountryScore" width="0" height="0" style="box-sizing: border-box; display: block; height: 0px; width: 0px;"></canvas></div>
+    <div class="chart-wrap"><canvas id="chartCountryScore" width="800" height="320"></canvas></div>
     <div class="source-box">
       来源：<a href="https://lpi.worldbank.org/international/global" target="_blank" style="color:var(--blue)">世界银行物流绩效指数（LPI 2023）</a>；各国国家统计局GDP数据；
       eMarketer电商市场预测（2024）；专家综合评分（E = 估算）
@@ -1427,14 +1427,14 @@ body {
 </div>
 </div>
 
-<div id="s7" class="section active" data-was="0">
+<div id="s7" class="section">
 <div class="container">
   <p class="section-title">竞品格局分析 — 东南亚跨境物流玩家深度对比</p>
 
   <!-- 电商平台 GMV 格局 -->
   <div class="card">
     <div class="card-title">东南亚电商平台 GMV 格局（2025年全年，亿美元）</div>
-    <div class="chart-wrap"><canvas id="chartCompetitorPlatform" width="0" height="0" style="box-sizing: border-box; display: block; height: 0px; width: 0px;"></canvas></div>
+    <div class="chart-wrap"><canvas id="chartCompetitorPlatform" width="800" height="320"></canvas></div>
     <div class="source-box">
       来源：<a href="https://momentworks.com" target="_blank" style="color:var(--blue)">Momentum Works《东南亚电商3.0报告》（2026.01）</a>；
       <a href="https://www.asiaecs.com/blog-index-detail-2242.html" target="_blank" style="color:var(--blue)">TikTok Shop东南亚2025年年度数据（2026.02.12）</a>；
@@ -1460,7 +1460,7 @@ body {
       </thead>
       <tbody>
         <tr style="background:rgba(37,99,235,.06)">
-          <td><strong>🥇 极兔速递<br><small>J&amp;T Express</small></strong></td>
+          <td><strong>🥇 极兔速递<br><small>J&T Express</small></strong></td>
           <td>东南亚本土快递龙头</td>
           <td class="up-val"><strong>34.4%</strong>（包裹量，连续6年第一）<br>包裹量76.6亿件↑67.8%<br>收入45亿美元</td>
           <td>降本至单票$0.30；布局非电商客户；中国市场份额承压但东南亚持续领先</td>
@@ -1518,7 +1518,7 @@ body {
   <!-- 物流企业收入对比图 -->
   <div class="card">
     <div class="card-title">主要物流企业营收规模对比（2023—2025，亿元人民币）</div>
-    <div class="chart-wrap"><canvas id="chartCompetitorRevenue" width="0" height="0" style="box-sizing: border-box; display: block; height: 0px; width: 0px;"></canvas></div>
+    <div class="chart-wrap"><canvas id="chartCompetitorRevenue" width="800" height="320"></canvas></div>
     <div class="source-box">
       来源：各公司公开年报；极兔2025年报（<a href="https://news.qq.com/rain/a/20260401A023OK00" target="_blank" style="color:var(--blue)">腾讯财经</a>）；
       京东物流2025年报（<a href="https://finance.sina.com.cn/wm/2026-03-08/doc-inhqfxar4507924.shtml" target="_blank" style="color:var(--blue)">新浪财经</a>）；
@@ -1529,7 +1529,7 @@ body {
   <!-- 竞争维度雷达对比 -->
   <div class="card">
     <div class="card-title">东南亚竞争维度雷达图 — 五大玩家能力对比</div>
-    <div class="chart-wrap"><canvas id="chartCompetitorRadar" width="0" height="0" style="box-sizing: border-box; display: block; height: 0px; width: 0px;"></canvas></div>
+    <div class="chart-wrap"><canvas id="chartCompetitorRadar" width="800" height="400"></canvas></div>
     <div class="source-box">
       评分说明：满分10分，基于公开财报、行业报告及专家评估综合打分。评分维度：网络覆盖 / 时效服务 / 成本竞争力 / 技术能力 / 本地化运营
       <br>来源：<a href="https://www.tmtpost.com/7698927.html" target="_blank" style="color:var(--blue)">钛媒体竞争分析（2025.09）</a>；
@@ -1548,14 +1548,14 @@ body {
         <tr>
           <td>🛒 <strong>Shopee</strong></td>
           <td class="up-val">~770亿$(E)<br>市占~52%</td>
-          <td>Ninja Van、J&amp;T、菜鸟（Lazada<br>同系）、各国本土快递</td>
+          <td>Ninja Van、J&T、菜鸟（Lazada<br>同系）、各国本土快递</td>
           <td>ShopeePay + SPX Express（自营快递）</td>
           <td>SPX Express扩张限制了外部合作，但高增量仍有空间</td>
         </tr>
         <tr>
           <td>📹 <strong>TikTok Shop</strong></td>
           <td class="up-val">456亿$<br>↑100% YoY</td>
-          <td>官方物流合作计划（OLP）：Ninja Van、J&amp;T、菜鸟等</td>
+          <td>官方物流合作计划（OLP）：Ninja Van、J&T、菜鸟等</td>
           <td>无自营物流，完全依托合作方</td>
           <td><strong>最大机遇</strong>：开放物流生态，中资物流入驻OLP可直接对接GMV增量</td>
         </tr>
@@ -1603,7 +1603,7 @@ body {
 </div>
 </div>
 
-<div id="s8" class="section active" data-was="0">
+<div id="s8" class="section">
 <div class="container">
   <p class="section-title">MTL / LTC 流程管理框架</p>
 
@@ -1668,7 +1668,7 @@ body {
 </div>
 </div>
 
-<div id="s9" class="section active" data-was="0">
+<div id="s9" class="section">
 <div class="container">
   <p class="section-title">战略建议与行动路径</p>
 
@@ -1738,13 +1738,13 @@ body {
 </div>
 </div>
 
-<div id="s10" class="section active" data-was="0">
+<div id="s10" class="section">
 <div class="container">
   <p class="section-title">财务与行业数据（2022—2025年季度回溯）</p>
 
   <div class="card">
     <div class="card-title">中国跨境电商出口规模季度数据（2022Q1—2025Q4E，亿元）</div>
-    <div class="chart-wrap"><canvas id="chartQtrCBEC" width="0" height="0" style="box-sizing: border-box; display: block; height: 0px; width: 0px;"></canvas></div>
+    <div class="chart-wrap"><canvas id="chartQtrCBEC" width="800" height="320"></canvas></div>
     <div class="source-box">
       来源：<a href="https://www.gov.cn/lianbo/bumen/202501/content_6998223.htm" target="_blank" style="color:var(--blue)">海关总署《中国货物贸易进出口统计》月报汇总</a>；<a href="https://www.mofcom.gov.cn/tjsh/index.html" target="_blank" style="color:var(--blue)">商务部跨境电商监测平台</a>；
       2025Q3/Q4为估算值（E）；数据验证参考：<a href="https://www.eastmoney.com" target="_blank" style="color:var(--blue)">东方财富网</a>、<a href="https://www.cninfo.com.cn" target="_blank" style="color:var(--blue)">巨潮资讯网</a>相关上市公司公告
@@ -1753,9 +1753,9 @@ body {
 
   <div class="card">
     <div class="card-title">中国跨境物流头部企业营收对比（2022—2025，亿元）</div>
-    <div class="chart-wrap"><canvas id="chartCompare" width="0" height="0" style="box-sizing: border-box; display: block; height: 0px; width: 0px;"></canvas></div>
+    <div class="chart-wrap"><canvas id="chartCompare" width="800" height="320"></canvas></div>
     <div class="source-box">
-      来源：<a href="https://www.sgx.com/securities/equities/ME8U" target="_blank" style="color:var(--blue)">极兔速递（J&amp;T Express）2023/2024年报（新加坡交易所SGX）</a>；<a href="https://www.cninfo.com.cn/new/disclosure/stock?orgId=gssz0002352&amp;stockCode=002352" target="_blank" style="color:var(--blue)">顺丰控股年报（深交所002352）</a>；
+      来源：<a href="https://www.sgx.com/securities/equities/ME8U" target="_blank" style="color:var(--blue)">极兔速递（J&T Express）2023/2024年报（新加坡交易所SGX）</a>；<a href="https://www.cninfo.com.cn/new/disclosure/stock?orgId=gssz0002352&stockCode=002352" target="_blank" style="color:var(--blue)">顺丰控股年报（深交所002352）</a>；
       <a href="https://www.alibabagroup.com/en-US/ir" target="_blank" style="color:var(--blue)">阿里巴巴2024年报（含菜鸟，NYSE: BABA）</a>；2025E为市场一致预期估算值；
       巨潮资讯网：http://www.cninfo.com.cn；东方财富网：https://www.eastmoney.com
     </div>
@@ -1774,33 +1774,33 @@ body {
         <tbody>
           <tr>
             <td><strong>中—东盟贸易(亿$)</strong></td>
-            <td>2080</td><td>2230</td><td>2160</td><td>2060</td>
-            <td>2220</td><td>2380</td><td>2340</td><td>2280</td>
-            <td>2440</td><td>2620</td><td>2580</td><td>2860</td>
+            <td>2,080</td><td>2,230</td><td>2,160</td><td>2,060</td>
+            <td>2,220</td><td>2,380</td><td>2,340</td><td>2,280</td>
+            <td>2,410</td><td>2,580</td><td>2,520(E)</td><td>2,420(E)</td>
           </tr>
           <tr>
             <td><strong>中国跨境电商出口(亿元)</strong></td>
-            <td>3980</td><td>4210</td><td>4680</td><td>4430</td>
-            <td>4200</td><td>4520</td><td>5180</td><td>4730</td>
-            <td>4550</td><td>4880</td><td>5620</td><td>5170</td>
+            <td>3,980</td><td>4,210</td><td>4,680</td><td>4,430</td>
+            <td>4,200</td><td>4,520</td><td>5,180</td><td>4,730</td>
+            <td>4,450</td><td>4,780</td><td>5,530(E)</td><td>5,080(E)</td>
           </tr>
           <tr>
             <td><strong>越南GDP增速(%)</strong></td>
             <td>3.3</td><td>4.1</td><td>5.3</td><td>6.7</td>
             <td>5.7</td><td>6.9</td><td>7.4</td><td>7.6</td>
-            <td>7.0</td><td>7.2</td><td>7.5</td><td>9.8</td>
+            <td>6.9(E)</td><td>7.0(E)</td><td>6.8(E)</td><td>6.5(E)</td>
           </tr>
           <tr>
             <td><strong>印尼GDP增速(%)</strong></td>
             <td>5.0</td><td>5.2</td><td>5.0</td><td>5.0</td>
             <td>5.1</td><td>5.1</td><td>4.9</td><td>5.0</td>
-            <td>4.9</td><td>5.0</td><td>5.0</td><td>5.1</td>
+            <td>4.9(E)</td><td>5.0(E)</td><td>5.0(E)</td><td>5.1(E)</td>
           </tr>
           <tr>
             <td><strong>TikTok Shop东南亚GMV(亿$)</strong></td>
             <td>25(E)</td><td>35(E)</td><td>45(E)</td><td>55(E)</td>
             <td>68</td><td>82</td><td>95</td><td>110</td>
-            <td>118</td><td>128</td><td>142</td><td>168</td>
+            <td>108</td><td>115</td><td>122(E)</td><td>111(E)</td>
           </tr>
         </tbody>
       </table>
@@ -1816,7 +1816,7 @@ body {
 
   <div class="card">
     <div class="card-title">东南亚主要电商平台GMV趋势（2023—2025E，亿美元）</div>
-    <div class="chart-wrap"><canvas id="chartPlatform" width="0" height="0" style="box-sizing: border-box; display: block; height: 0px; width: 0px;"></canvas></div>
+    <div class="chart-wrap"><canvas id="chartPlatform" width="800" height="320"></canvas></div>
     <div class="source-box">
       来源：<a href="https://momentworks.com" target="_blank" style="color:var(--blue)">Momentum Works《东南亚电商年度报告2024》</a>；各平台公司年报及投资者关系资料；
       <a href="https://investors.sea.com" target="_blank" style="color:var(--blue)">Sea Limited（NYSE:SE）年报</a>、TikTok母公司字节跳动内部数据；2025(E)为行业估算值
@@ -1825,7 +1825,7 @@ body {
 </div>
 </div>
 
-<div id="s11" class="section active" data-was="0">
+<div id="s11" class="section">
 <div class="container">
   <p class="section-title">参考文献与数据来源</p>
 
@@ -1885,13 +1885,13 @@ body {
   <div class="card">
     <div class="card-title">上市公司及金融数据来源</div>
     <ol style="padding-left:1.4rem;font-size:.88rem;color:var(--muted);line-height:2" start="11">
-      <li>极兔速递（J&amp;T Express）2023/2024年度报告，新加坡交易所（SGX）公告
+      <li>极兔速递（J&T Express）2023/2024年度报告，新加坡交易所（SGX）公告
         <br><a href="https://www.sgx.com/securities/equities/ME8U" target="_blank" style="color:var(--blue)">👉 SGX股票代码 ME8U（权威唯一）</a>
         <span style="color:var(--muted);font-size:.8em"> ｜ </span>
         <a href="https://www.sgx.com" target="_blank" style="color:var(--blue)">新加坡交易所主页</a>
       </li>
       <li>顺丰控股2022—2025年报，深圳证券交易所，代码：002352
-        <br><a href="https://www.cninfo.com.cn/new/disclosure/stock?orgId=gssz0002352&amp;stockCode=002352" target="_blank" style="color:var(--blue)">👉 巨潮资讯网 002352（权威唯一，深交所指定披露平台）</a>
+        <br><a href="https://www.cninfo.com.cn/new/disclosure/stock?orgId=gssz0002352&stockCode=002352" target="_blank" style="color:var(--blue)">👉 巨潮资讯网 002352（权威唯一，深交所指定披露平台）</a>
       </li>
       <li>阿里巴巴集团2024财年年报（含菜鸟物流数据），纽交所，代码：BABA
         <br><a href="https://www.alibabagroup.com/en-US/ir" target="_blank" style="color:var(--blue)">👉 alibabagroup.com investor relations（权威唯一）</a>
@@ -1938,13 +1938,13 @@ body {
   <div class="card">
     <div class="card-title">关于本报告</div>
     <table class="data-table">
-      <tbody><tr><td><strong>报告版本</strong></td><td>A-2.3（东南亚跨境物流专题版·含权威来源链接）</td></tr>
+      <tr><td><strong>报告版本</strong></td><td>A-2.3（东南亚跨境物流专题版·含权威来源链接）</td></tr>
       <tr><td><strong>生成日期</strong></td><td>2026年4月6日</td></tr>
       <tr><td><strong>研究范围</strong></td><td>东南亚六大核心市场（越南、印尼、马来西亚、菲律宾、泰国、新加坡）</td></tr>
       <tr><td><strong>分析框架</strong></td><td>PESTEL、波特钻石模型、SWOT、华为MTL/LTC流程管理</td></tr>
       <tr><td><strong>数据回溯期</strong></td><td>2022Q1—2025Q4（季度数据）</td></tr>
       <tr><td><strong>技术规格</strong></td><td>HTML5单文件，Chart.js图表，完全离线可用（JS库内嵌）</td></tr>
-    </tbody></table>
+    </table>
   </div>
 </div>
 </div>
@@ -2620,6 +2620,5 @@ async function exportPPT(){
 })();
 
 </script>
-
 </body>
 </html>
