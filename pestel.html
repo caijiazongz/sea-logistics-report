@@ -3,188 +3,263 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PESTEL 战略分析工具 | 通用行业版</title>
+<title>PESTEL战略分析工具V1.1 — 实时多维度评估与可视化</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
 <style>
-:root{--bg:#0b1220;--card:#111827;--elev:#1f2937;--text:#e5e7eb;--muted:#9ca3af;--accent:#3b82f6;--accent2:#10b981;--accent3:#f59e0b;--accent4:#ef4444;--border:#374151;}
+:root{
+  --bg:#f8fafc;--card:#fff;--text:#1e293b;--muted:#64748b;--border:#e2e8f0;
+  --P-bg:#eff6ff;--P-text:#1e40af;--P-bar:#3b82f6;
+  --E-bg:#f0fdf4;--E-text:#166534;--E-bar:#22c55e;
+  --S-bg:#faf5ff;--S-text:#7c3aed;--S-bar:#a855f7;
+  --T-bg:#fff7ed;--T-text:#c2410c;--T-bar:#f97316;
+  --En-bg:#f0fdfa;--En-text:#0f766e;--En-bar:#14b8a6;
+  --L-bg:#fef2f2;--L-text:#991b1b;--L-bar:#ef4444;
+}
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;min-height:100vh}
-.container{max-width:1400px;margin:0 auto;padding:20px}
-header{text-align:center;padding:30px 0 20px;border-bottom:1px solid var(--border);margin-bottom:24px}
-header h1{font-size:2rem;font-weight:700;background:linear-gradient(90deg,var(--accent),#60a5fa);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-header p{color:var(--muted);margin-top:6px;font-size:.95rem}
-.toolbar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:center;margin-bottom:24px;padding:16px;background:var(--card);border-radius:12px;border:1px solid var(--border)}
-.toolbar label{color:var(--muted);font-size:.85rem}
-.toolbar select,.toolbar input,.toolbar button{padding:8px 14px;border-radius:8px;border:1px solid var(--border);background:var(--elev);color:var(--text);font-size:.9rem;outline:none}
-.toolbar select:focus,.toolbar input:focus{border-color:var(--accent)}
-.toolbar button{cursor:pointer;transition:.2s;font-weight:500}
-.toolbar button:hover{background:var(--accent);border-color:var(--accent);color:#fff}
-.toolbar button.secondary{background:transparent;border-color:var(--muted);color:var(--muted)}
-.toolbar button.secondary:hover{border-color:var(--text);color:var(--text);background:var(--elev)}
-.grid{display:grid;grid-template-columns:1fr 420px;gap:24px}
-@media(max-width:1100px){.grid{grid-template-columns:1fr}}
-.left{display:flex;flex-direction:column;gap:20px}
-.dimension{background:var(--card);border-radius:12px;border:1px solid var(--border);overflow:hidden}
-.dim-header{display:flex;align-items:center;gap:12px;padding:16px 20px;background:linear-gradient(90deg,rgba(59,130,246,.15),transparent);border-bottom:1px solid var(--border);cursor:pointer;user-select:none}
-.dim-header .icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;font-weight:700;color:#fff}
-.dim-header .title{flex:1}
-.dim-header .title h3{font-size:1.05rem;font-weight:600}
-.dim-header .title .avg{font-size:.8rem;color:var(--muted)}
-.dim-header .score{font-size:1.4rem;font-weight:700;color:var(--accent)}
-.dim-body{padding:16px 20px;display:none}
-.dim-body.open{display:block}
-.factor{display:grid;grid-template-columns:1fr 140px 60px auto;gap:12px;align-items:center;padding:10px 0;border-bottom:1px solid rgba(55,65,81,.5)}
-.factor:last-child{border-bottom:none}
-.factor-name{font-size:.9rem}
-.factor-name small{display:block;color:var(--muted);font-size:.75rem;margin-top:2px}
-.factor input[type=range]{width:100%;cursor:pointer}
-.factor .num{width:44px;text-align:center;font-weight:700;font-size:1rem;background:var(--elev);border:1px solid var(--border);border-radius:6px;color:var(--text);padding:4px}
-.factor .note-btn{width:32px;height:32px;border-radius:8px;border:1px solid var(--border);background:var(--elev);color:var(--muted);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.2s}
-.factor .note-btn:hover{color:var(--accent);border-color:var(--accent)}
-.factor .note-btn.has-note{color:var(--accent2);border-color:var(--accent2)}
-.note-input{width:100%;margin-top:8px;padding:8px 12px;border-radius:8px;border:1px solid var(--border);background:var(--bg);color:var(--text);font-size:.85rem;resize:vertical;min-height:60px;display:none}
-.note-input.open{display:block}
-.right{display:flex;flex-direction:column;gap:20px}
-.chart-box{background:var(--card);border-radius:12px;border:1px solid var(--border);padding:20px}
-.chart-box h4{font-size:.95rem;margin-bottom:12px;color:var(--muted);font-weight:500}
-.chart-container{position:relative;height:320px}
-.bar-container{position:relative;height:260px}
-.summary{background:var(--card);border-radius:12px;border:1px solid var(--border);padding:20px}
-.summary h4{font-size:.95rem;margin-bottom:12px;color:var(--muted);font-weight:500}
-.summary .item{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(55,65,81,.4);font-size:.9rem}
-.summary .item:last-child{border-bottom:none}
-.summary .item .label{color:var(--muted)}
-.summary .item .val{font-weight:600}
-.summary .total{margin-top:12px;padding-top:12px;border-top:2px solid var(--border);display:flex;justify-content:space-between;font-size:1.05rem;font-weight:700}
-.actions{display:flex;gap:10px;flex-wrap:wrap}
-.actions button{flex:1;min-width:120px;padding:10px 16px;border-radius:10px;border:1px solid var(--border);background:var(--elev);color:var(--text);font-size:.9rem;cursor:pointer;transition:.2s;font-weight:500}
-.actions button:hover{background:var(--accent);border-color:var(--accent);color:#fff}
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.7);display:none;align-items:center;justify-content:center;z-index:1000;padding:20px}
+.container{max-width:1400px;margin:0 auto;padding:24px}
+
+/* Header */
+.page-header{padding-bottom:16px;border-bottom:2px solid var(--P-bar);margin-bottom:20px}
+.page-header h1{font-size:1.7rem;font-weight:700;color:var(--text);letter-spacing:-.3px}
+.page-header .sub{font-size:1rem;color:var(--muted);margin-top:4px;font-weight:400}
+
+/* Section title */
+.section-title{display:flex;align-items:center;gap:10px;margin-bottom:16px;font-size:1.15rem;font-weight:700;color:var(--text)}
+.section-title::before{content:'';width:4px;height:22px;background:var(--P-bar);border-radius:2px}
+
+/* Toolbar */
+.toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:20px;padding:14px 16px;background:var(--card);border-radius:10px;border:1px solid var(--border);box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.toolbar label{font-size:.82rem;color:var(--muted);font-weight:500}
+.toolbar select,.toolbar input,.toolbar button{padding:7px 12px;border-radius:8px;border:1px solid var(--border);background:#fff;color:var(--text);font-size:.85rem;outline:none;transition:.15s}
+.toolbar select:focus,.toolbar input:focus{border-color:var(--P-bar);box-shadow:0 0 0 3px rgba(59,130,246,.1)}
+.toolbar button{cursor:pointer;font-weight:500;background:var(--P-bar);color:#fff;border-color:var(--P-bar)}
+.toolbar button:hover{background:#2563eb}
+.toolbar button.secondary{background:#fff;color:var(--muted);border-color:var(--border)}
+.toolbar button.secondary:hover{border-color:var(--muted);color:var(--text)}
+.toolbar input[type=file]{display:none}
+
+/* Layout */
+.main-grid{display:grid;grid-template-columns:1fr 380px;gap:24px}
+@media(max-width:1100px){.main-grid{grid-template-columns:1fr}}
+
+/* Cards grid */
+.cards-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media(max-width:900px){.cards-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.cards-grid{grid-template-columns:1fr}}
+
+/* Dimension card */
+.dim-card{background:var(--card);border-radius:12px;border:1px solid var(--border);overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.04);transition:box-shadow .2s}
+.dim-card:hover{box-shadow:0 4px 12px rgba(0,0,0,.08)}
+.dim-header{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid var(--border)}
+.dim-header .left{display:flex;align-items:center;gap:10px}
+.dim-header .badge{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:.85rem;font-weight:700;color:#fff}
+.dim-header .name{font-size:.95rem;font-weight:700}
+.dim-header .avg{font-size:1.15rem;font-weight:700}
+.dim-body{padding:12px 16px 14px}
+
+/* Factor row */
+.factor{padding:8px 0;border-bottom:1px dashed #e2e8f0}
+.factor:last-child{border-bottom:none;padding-bottom:0}
+.factor-top{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:4px}
+.factor-name{font-size:.85rem;font-weight:600}
+.factor-name small{display:block;font-size:.72rem;color:var(--muted);font-weight:400;margin-top:1px}
+.factor-controls{display:flex;align-items:center;gap:8px}
+.factor input[type=range]{width:100%;cursor:pointer;height:4px;border-radius:2px;-webkit-appearance:none;appearance:none;background:#e2e8f0;outline:none}
+.factor input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:14px;height:14px;border-radius:50%;cursor:pointer;border:2px solid #fff;box-shadow:0 1px 3px rgba(0,0,0,.2)}
+.factor .num{width:36px;text-align:center;font-weight:700;font-size:.85rem;background:#f8fafc;border:1px solid var(--border);border-radius:6px;color:var(--text);padding:3px 2px}
+.factor .note-btn{width:26px;height:26px;border-radius:6px;border:1px solid var(--border);background:#f8fafc;color:var(--muted);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.8rem;transition:.15s}
+.factor .note-btn:hover{border-color:var(--muted);color:var(--text)}
+.factor .note-btn.on{background:#eff6ff;border-color:var(--P-bar);color:var(--P-bar)}
+.note-box{width:100%;margin-top:6px;padding:8px 10px;border-radius:8px;border:1px solid var(--border);background:#f8fafc;font-size:.8rem;color:var(--text);resize:vertical;min-height:50px;outline:none;display:none}
+.note-box.open{display:block}
+.note-box:focus{border-color:var(--P-bar)}
+
+/* Color variants */
+.dim-P .dim-header{background:var(--P-bg)}
+.dim-P .badge{background:var(--P-bar)}
+.dim-P .name{color:var(--P-text)}
+.dim-P .avg{color:var(--P-text)}
+.dim-P input[type=range]::-webkit-slider-thumb{background:var(--P-bar)}
+.dim-E .dim-header{background:var(--E-bg)}
+.dim-E .badge{background:var(--E-bar)}
+.dim-E .name{color:var(--E-text)}
+.dim-E .avg{color:var(--E-text)}
+.dim-E input[type=range]::-webkit-slider-thumb{background:var(--E-bar)}
+.dim-S .dim-header{background:var(--S-bg)}
+.dim-S .badge{background:var(--S-bar)}
+.dim-S .name{color:var(--S-text)}
+.dim-S .avg{color:var(--S-text)}
+.dim-S input[type=range]::-webkit-slider-thumb{background:var(--S-bar)}
+.dim-T .dim-header{background:var(--T-bg)}
+.dim-T .badge{background:var(--T-bar)}
+.dim-T .name{color:var(--T-text)}
+.dim-T .avg{color:var(--T-text)}
+.dim-T input[type=range]::-webkit-slider-thumb{background:var(--T-bar)}
+.dim-En .dim-header{background:var(--En-bg)}
+.dim-En .badge{background:var(--En-bar)}
+.dim-En .name{color:var(--En-text)}
+.dim-En .avg{color:var(--En-text)}
+.dim-En input[type=range]::-webkit-slider-thumb{background:var(--En-bar)}
+.dim-L .dim-header{background:var(--L-bg)}
+.dim-L .badge{background:var(--L-bar)}
+.dim-L .name{color:var(--L-text)}
+.dim-L .avg{color:var(--L-text)}
+.dim-L input[type=range]::-webkit-slider-thumb{background:var(--L-bar)}
+
+/* Sidebar */
+.sidebar{display:flex;flex-direction:column;gap:16px}
+.widget{background:var(--card);border-radius:12px;border:1px solid var(--border);padding:16px;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.widget h4{font-size:.82rem;color:var(--muted);font-weight:600;margin-bottom:10px;text-transform:uppercase;letter-spacing:.5px}
+.chart-wrap{position:relative;height:260px}
+.summary-item{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid #f1f5f9;font-size:.88rem}
+.summary-item:last-child{border-bottom:none}
+.summary-item .label{font-weight:500}
+.summary-item .val{font-weight:700}
+.summary-total{margin-top:10px;padding-top:10px;border-top:2px solid var(--border);display:flex;justify-content:space-between;font-size:1rem;font-weight:700}
+
+/* Actions */
+.actions{display:flex;gap:8px;flex-wrap:wrap}
+.actions button{flex:1;min-width:100px;padding:9px 12px;border-radius:8px;border:1px solid var(--border);background:#f8fafc;color:var(--text);font-size:.82rem;cursor:pointer;transition:.15s;font-weight:500}
+.actions button:hover{background:var(--P-bar);border-color:var(--P-bar);color:#fff}
+
+/* Modal */
+.modal{position:fixed;inset:0;background:rgba(15,23,42,.5);display:none;align-items:center;justify-content:center;z-index:1000;padding:20px}
 .modal.open{display:flex}
-.modal-box{background:var(--card);border-radius:16px;border:1px solid var(--border);max-width:600px;width:100%;max-height:80vh;display:flex;flex-direction:column}
+.modal-box{background:var(--card);border-radius:14px;border:1px solid var(--border);max-width:620px;width:100%;max-height:82vh;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,.15)}
 .modal-header{padding:16px 20px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
-.modal-header h3{font-size:1.1rem}
-.modal-header .close{width:32px;height:32px;border-radius:8px;border:1px solid var(--border);background:var(--elev);color:var(--muted);cursor:pointer;display:flex;align-items:center;justify-content:center}
+.modal-header h3{font-size:1rem;font-weight:700}
+.modal-header .close{width:30px;height:30px;border-radius:8px;border:1px solid var(--border);background:#f8fafc;color:var(--muted);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.1rem}
 .modal-header .close:hover{color:var(--text)}
-.modal-body{padding:16px 20px;overflow-y:auto;flex:1;font-size:.9rem;color:var(--muted)}
-.modal-body textarea{width:100%;min-height:200px;background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:12px;color:var(--text);font-family:monospace;font-size:.85rem;resize:vertical}
-.modal-footer{padding:16px 20px;border-top:1px solid var(--border);display:flex;gap:10px;justify-content:flex-end}
-.modal-footer button{padding:8px 18px;border-radius:8px;border:1px solid var(--border);background:var(--elev);color:var(--text);font-size:.9rem;cursor:pointer}
-.modal-footer button.primary{background:var(--accent);border-color:var(--accent);color:#fff}
-footer{text-align:center;padding:30px 0;color:var(--muted);font-size:.8rem}
-.dim-P .dim-header,.dim-P .icon{background:rgba(239,68,68,.2);color:#ef4444}
-.dim-E .dim-header,.dim-E .icon{background:rgba(245,158,11,.2);color:#f59e0b}
-.dim-S .dim-header,.dim-S .icon{background:rgba(16,185,129,.2);color:#10b981}
-.dim-T .dim-header,.dim-T .icon{background:rgba(59,130,246,.2);color:#3b82f6}
-.dim-En .dim-header,.dim-En .icon{background:rgba(139,92,246,.2);color:#8b5cf6}
-.dim-L .dim-header,.dim-L .icon{background:rgba(236,72,153,.2);color:#ec4899}
-.score.low{color:var(--accent4)}
-.score.mid{color:var(--accent3)}
-.score.high{color:var(--accent2)}
+.modal-body{padding:14px 20px;overflow-y:auto;flex:1}
+.modal-body textarea{width:100%;min-height:220px;background:#f8fafc;border:1px solid var(--border);border-radius:10px;padding:12px;color:var(--text);font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:.8rem;resize:vertical;outline:none}
+.modal-body textarea:focus{border-color:var(--P-bar)}
+.modal-footer{padding:14px 20px;border-top:1px solid var(--border);display:flex;gap:8px;justify-content:flex-end}
+.modal-footer button{padding:7px 16px;border-radius:8px;border:1px solid var(--border);background:#f8fafc;color:var(--text);font-size:.82rem;cursor:pointer;font-weight:500}
+.modal-footer button.primary{background:var(--P-bar);border-color:var(--P-bar);color:#fff}
+
+/* Score color classes */
+.score-low{color:#dc2626}
+.score-mid{color:#ea580c}
+.score-high{color:#16a34a}
+
+footer{text-align:center;padding:28px 0 12px;color:var(--muted);font-size:.75rem}
 </style>
 </head>
 <body>
 <div class="container">
-<header>
-<h1>PESTEL 战略分析工具</h1>
-<p>通用行业版 — 实时多维度评估与可视化</p>
+
+<header class="page-header">
+  <h1>PESTEL战略分析工具</h1>
+  <div class="sub">——实时多维度评估与可视化</div>
 </header>
 
 <div class="toolbar">
-<label>行业模板</label>
-<select id="industrySelect">
-<option value="custom">自定义</option>
-<option value="logistics">跨境物流</option>
-<option value="tech">科技 / SaaS</option>
-<option value="retail">新零售 / 电商</option>
-<option value="finance">金融科技</option>
-<option value="manufacturing">高端制造</option>
-<option value="energy">新能源</option>
-<option value="healthcare">医疗健康</option>
-<option value="realestate">房地产</option>
-</select>
-<input id="projectName" placeholder="项目名称（可选）" style="min-width:180px">
-<button onclick="exportJSON()">导出 JSON</button>
-<button onclick="exportCSV()">导出 CSV</button>
-<button class="secondary" onclick="document.getElementById('fileInput').click()">导入 JSON</button>
-<input type="file" id="fileInput" accept=".json" style="display:none" onchange="importJSON(event)">
-<button class="secondary" onclick="openReport()">生成报告</button>
+  <label>行业模板</label>
+  <select id="industrySelect">
+    <option value="custom">自定义</option>
+    <option value="logistics">跨境物流</option>
+    <option value="tech">科技 / SaaS</option>
+    <option value="retail">新零售 / 电商</option>
+    <option value="finance">金融科技</option>
+    <option value="manufacturing">高端制造</option>
+    <option value="energy">新能源</option>
+    <option value="healthcare">医疗健康</option>
+    <option value="realestate">房地产</option>
+  </select>
+  <input id="projectName" placeholder="项目名称（可选）" style="min-width:170px">
+  <button onclick="exportJSON()">导出 JSON</button>
+  <button onclick="exportCSV()">导出 CSV</button>
+  <button class="secondary" onclick="document.getElementById('fileInput').click()">导入 JSON</button>
+  <input type="file" id="fileInput" accept=".json" onchange="importJSON(event)">
+  <button class="secondary" onclick="openReport()">生成报告</button>
 </div>
 
-<div class="grid">
-<div class="left" id="dimensions"></div>
-<div class="right">
-<div class="chart-box">
-<h4>PESTEL 雷达图</h4>
-<div class="chart-container"><canvas id="radarChart"></canvas></div>
-</div>
-<div class="chart-box">
-<h4>维度对比柱状图</h4>
-<div class="bar-container"><canvas id="barChart"></canvas></div>
-</div>
-<div class="summary">
-<h4>评估摘要</h4>
-<div id="summaryBox"></div>
-</div>
-</div>
+<div class="section-title">PESTEL全要素分析框架</div>
+
+<div class="main-grid">
+  <div class="left" id="cardsArea"></div>
+  <div class="sidebar">
+    <div class="widget">
+      <h4>雷达图</h4>
+      <div class="chart-wrap"><canvas id="radarChart"></canvas></div>
+    </div>
+    <div class="widget">
+      <h4>维度对比</h4>
+      <div class="chart-wrap"><canvas id="barChart"></canvas></div>
+    </div>
+    <div class="widget">
+      <h4>评估摘要</h4>
+      <div id="summaryBox"></div>
+    </div>
+    <div class="widget">
+      <h4>操作</h4>
+      <div class="actions">
+        <button onclick="exportJSON()">导出 JSON</button>
+        <button onclick="exportCSV()">导出 CSV</button>
+        <button class="secondary" onclick="document.getElementById('fileInput').click()">导入 JSON</button>
+        <button class="secondary" onclick="openReport()">生成报告</button>
+      </div>
+    </div>
+  </div>
 </div>
 
-<footer>PESTEL Analyzer v1.0 | 数据仅存储于本地浏览器 | 参考 A3-2 独立版风格</footer>
+<footer>PESTEL Analyzer V1.1 | 数据仅存储于本地浏览器 | 参考 A3-2 独立版风格重构</footer>
 </div>
 
 <div class="modal" id="reportModal">
-<div class="modal-box">
-<div class="modal-header"><h3>PESTEL 分析报告</h3><button class="close" onclick="closeModal()">&times;</button></div>
-<div class="modal-body"><textarea id="reportText" readonly></textarea></div>
-<div class="modal-footer">
-<button onclick="copyReport()">复制报告</button>
-<button class="primary" onclick="downloadReport()">下载 TXT</button>
-</div>
-</div>
+  <div class="modal-box">
+    <div class="modal-header"><h3>PESTEL 分析报告</h3><button class="close" onclick="closeModal()">&times;</button></div>
+    <div class="modal-body"><textarea id="reportText" readonly></textarea></div>
+    <div class="modal-footer">
+      <button onclick="copyReport()">复制报告</button>
+      <button class="primary" onclick="downloadReport()">下载 TXT</button>
+    </div>
+  </div>
 </div>
 
 <script>
 const DIMENSIONS=[
-{key:'P',name:'政治环境 (Political)',icon:'P',color:'#ef4444',factors:[
-{n:'政策法规',d:'行业监管政策、税收优惠、贸易政策'},
-{n:'政府稳定性',d:'政治局势、换届影响、政策连续性'},
+{key:'P',name:'P — 政治 (Political)',icon:'P',color:'#3b82f6',factors:[
+{n:'政策法规',d:'行业监管、税收优惠、贸易政策'},
+{n:'政府稳定性',d:'政治局势、政策连续性'},
 {n:'国际关系',d:'地缘政治、双边协议、制裁风险'},
-{n:'国有化风险',d:'资产征收、外资限制、合资要求'},
-{n:'腐败指数',d:'透明国际排名、营商环境便利度'}
+{n:'国有化风险',d:'资产征收、外资限制'},
+{n:'腐败指数',d:'透明国际排名、营商环境'}
 ]},
-{key:'E',name:'经济环境 (Economic)',icon:'E',color:'#f59e0b',factors:[
-{n:'GDP增长',d:'宏观经济增速、区域经济差异'},
-{n:'汇率波动',d:'本币对美元/欧元汇率稳定性'},
-{n:'通货膨胀',d:'CPI/PPI走势、购买力变化'},
-{n:'利率环境',d:'融资成本、基准利率趋势'},
-{n:'居民收入',d:'可支配收入、消费升级/降级'}
+{key:'E',name:'E — 经济 (Economic)',icon:'E',color:'#22c55e',factors:[
+{n:'GDP增长',d:'宏观经济增速'},
+{n:'汇率波动',d:'本币对美元/欧元稳定性'},
+{n:'通货膨胀',d:'CPI/PPI、购买力变化'},
+{n:'利率环境',d:'融资成本、基准利率'},
+{n:'居民收入',d:'可支配收入、消费升级'}
 ]},
-{key:'S',name:'社会环境 (Social)',icon:'S',color:'#10b981',factors:[
-{n:'人口结构',d:'老龄化、劳动力供给、人口红利'},
-{n:'消费习惯',d:'线上渗透率、品牌偏好、消费趋势'},
-{n:'教育水平',d:'高等教育普及率、人才供给质量'},
-{n:'文化价值观',d:'本地化需求、ESG意识、生活方式'},
-{n:'城市化率',d:'城镇化进程、区域人口流动'}
+{key:'S',name:'S — 社会 (Social)',icon:'S',color:'#a855f7',factors:[
+{n:'人口结构',d:'老龄化、劳动力供给'},
+{n:'消费习惯',d:'线上渗透率、品牌偏好'},
+{n:'教育水平',d:'高等教育普及率'},
+{n:'文化价值观',d:'本地化需求、ESG意识'},
+{n:'城市化率',d:'城镇化、人口流动'}
 ]},
-{key:'T',name:'技术环境 (Technological)',icon:'T',color:'#3b82f6',factors:[
-{n:'技术迭代速度',d:'颠覆性技术出现频率、代际更替'},
-{n:'数字化水平',d:'AI/大数据/云计算应用普及度'},
-{n:'研发投入',d:'行业R&D强度、专利密度'},
-{n:'基础设施',d:'5G/数据中心/物联网覆盖'},
-{n:'技术人才',d:'工程师供给、技术移民政策'}
+{key:'T',name:'T — 技术 (Technological)',icon:'T',color:'#f97316',factors:[
+{n:'技术迭代速度',d:'颠覆性技术出现频率'},
+{n:'数字化水平',d:'AI/大数据/云计算普及'},
+{n:'研发投入',d:'R&D强度、专利密度'},
+{n:'基础设施',d:'5G/数据中心/物联网'},
+{n:'技术人才',d:'工程师供给'}
 ]},
-{key:'En',name:'生态环境 (Environmental)',icon:'En',color:'#8b5cf6',factors:[
-{n:'环保法规',d:'碳排放限制、污染物排放标准'},
-{n:'气候风险',d:'极端天气频率、自然灾害暴露'},
-{n:'资源约束',d:'能源/水资源/原材料可得性'},
-{n:'碳中和目标',d:'双碳政策、绿色金融激励'},
-{n:'循环经济',d:'废弃物回收、可持续供应链'}
+{key:'En',name:'En — 环境 (Environmental)',icon:'En',color:'#14b8a6',factors:[
+{n:'环保法规',d:'碳排放限制、排放标准'},
+{n:'气候风险',d:'极端天气、自然灾害'},
+{n:'资源约束',d:'能源/水资源可得性'},
+{n:'碳中和目标',d:'双碳政策、绿色金融'},
+{n:'循环经济',d:'废弃物回收、绿色供应链'}
 ]},
-{key:'L',name:'法律环境 (Legal)',icon:'L',color:'#ec4899',factors:[
-{n:'劳动法规',d:'最低工资、社保缴纳、解雇保护'},
-{n:'知识产权保护',d:'专利/商标/版权执法力度'},
-{n:'数据隐私',d:'GDPR/个人信息保护法合规'},
-{n:'反垄断',d:'平台经济监管、并购审查'},
+{key:'L',name:'L — 法律 (Legal)',icon:'L',color:'#ef4444',factors:[
+{n:'劳动法规',d:'最低工资、社保、解雇保护'},
+{n:'知识产权保护',d:'专利/商标/版权执法'},
+{n:'数据隐私',d:'GDPR/个人信息保护法'},
+{n:'反垄断',d:'平台监管、并购审查'},
 {n:'争议解决',d:'司法效率、仲裁便利性'}
 ]}
 ];
@@ -209,33 +284,41 @@ DIMENSIONS.forEach(d=>{data[d.key]=d.factors.map(()=>({v:5,n:''}));});
 }
 
 function render(){
-const container=document.getElementById('dimensions');
+const container=document.getElementById('cardsArea');
 container.innerHTML='';
+const grid=document.createElement('div');grid.className='cards-grid';
 DIMENSIONS.forEach(d=>{
 const dimData=data[d.key];
 const avg=(dimData.reduce((s,x)=>s+x.v,0)/dimData.length).toFixed(1);
-const el=document.createElement('div');
-el.className=`dimension dim-${d.key}`;
-el.innerHTML=`<div class="dim-header" onclick="toggleDim('${d.key}')"><div class="icon">${d.icon}</div><div class="title"><h3>${d.name}</h3><div class="avg">${d.factors.length} 项因子 · 点击展开编辑</div></div><div class="score ${avg<4?'low':avg<7?'mid':'high'}">${avg}</div></div><div class="dim-body" id="body-${d.key}"></div>`;
-const body=el.querySelector('.dim-body');
+const card=document.createElement('div');
+card.className=`dim-card dim-${d.key}`;
+let factorsHtml='';
 d.factors.forEach((f,i)=>{
-const row=document.createElement('div');row.className='factor';
-row.innerHTML=`<div class="factor-name">${f.n}<small>${f.d}</small></div><div><input type="range" min="1" max="10" step="1" value="${dimData[i].v}" oninput="setVal('${d.key}',${i},this.value)" style="accent-color:${d.color}"></div><input class="num" type="number" min="1" max="10" value="${dimData[i].v}" onchange="setVal('${d.key}',${i},this.value)"><button class="note-btn ${dimData[i].n?'has-note':''}" onclick="toggleNote('${d.key}',${i})" title="备注">&#9998;</button>`;
-const note=document.createElement('textarea');note.className='note-input';note.id=`note-${d.key}-${i}`;note.placeholder='输入备注...';note.value=dimData[i].n;note.oninput=function(){data[d.key][i].n=this.value;const btn=row.querySelector('.note-btn');btn.classList.toggle('has-note',this.value.length>0);};
-body.appendChild(row);
-body.appendChild(note);
+factorsHtml+=`<div class="factor">
+  <div class="factor-top">
+    <div class="factor-name">${f.n}<small>${f.d}</small></div>
+    <div class="factor-controls">
+      <input class="num" type="number" min="1" max="10" value="${dimData[i].v}" onchange="setVal('${d.key}',${i},this.value)">
+      <button class="note-btn ${dimData[i].n?'on':''}" onclick="toggleNote('${d.key}',${i})" title="备注">&#9998;</button>
+    </div>
+  </div>
+  <input type="range" min="1" max="10" step="1" value="${dimData[i].v}" oninput="setVal('${d.key}',${i},this.value)">
+  <textarea class="note-box" id="note-${d.key}-${i}" placeholder="输入备注..." oninput="updateNote('${d.key}',${i},this.value)">${dimData[i].n}</textarea>
+</div>`;
 });
-container.appendChild(el);
+card.innerHTML=`<div class="dim-header"><div class="left"><div class="badge">${d.icon}</div><div class="name">${d.name}</div></div><div class="avg ${avg<4?'score-low':avg<7?'score-mid':'score-high'}">${avg}</div></div><div class="dim-body">${factorsHtml}</div>`;
+grid.appendChild(card);
 });
+container.appendChild(grid);
 updateCharts();updateSummary();
 }
 
 function setVal(dk,idx,val){val=Math.max(1,Math.min(10,parseInt(val)||5));data[dk][idx].v=val;render();}
-function toggleDim(k){document.getElementById('body-'+k).classList.toggle('open');}
 function toggleNote(k,i){document.getElementById(`note-${k}-${i}`).classList.toggle('open');}
+function updateNote(k,i,val){data[k][i].n=val;const btn=document.querySelector(`#note-${k}-${i}`).previousElementSibling.querySelector('.note-btn')||document.querySelector(`textarea[id="note-${k}-${i}"]`).parentElement.querySelector('.note-btn');if(btn)btn.classList.toggle('on',val.length>0);}
 
 function updateCharts(){
-const labels=DIMENSIONS.map(d=>d.name.split(' ')[0]);
+const labels=DIMENSIONS.map(d=>d.icon);
 const values=DIMENSIONS.map(d=>{
 const arr=data[d.key];
 return +(arr.reduce((s,x)=>s+x.v,0)/arr.length).toFixed(1);
@@ -244,15 +327,15 @@ const colors=DIMENSIONS.map(d=>d.color);
 
 if(!radarChart){
 radarChart=new Chart(document.getElementById('radarChart'),{
-type:'radar',data:{labels, datasets:[{label:'综合评分',data:values,backgroundColor:'rgba(59,130,246,0.2)',borderColor:'#3b82f6',pointBackgroundColor:colors,pointBorderColor:'#fff',pointRadius:5,borderWidth:2}]},
-options:{responsive:true,maintainAspectRatio:false,scales:{r:{min:0,max:10,ticks:{stepSize:2,color:'#9ca3af',backdropColor:'transparent'},grid:{color:'#374151'},pointLabels:{color:'#e5e7eb',font:{size:11}}}},plugins:{legend:{display:false}}}
+type:'radar',data:{labels,datasets:[{label:'综合评分',data:values,backgroundColor:'rgba(59,130,246,0.15)',borderColor:'#3b82f6',pointBackgroundColor:colors,pointBorderColor:'#fff',pointRadius:5,borderWidth:2}]},
+options:{responsive:true,maintainAspectRatio:false,scales:{r:{min:0,max:10,ticks:{stepSize:2,color:'#94a3b8',backdropColor:'transparent'},grid:{color:'#e2e8f0'},pointLabels:{color:'#475569',font:{size:11,weight:'600'}}}},plugins:{legend:{display:false}}}
 });
 }else{radarChart.data.datasets[0].data=values;radarChart.update();}
 
 if(!barChart){
 barChart=new Chart(document.getElementById('barChart'),{
-type:'bar',data:{labels,datasets:[{label:'平均分',data:values,backgroundColor:colors,borderRadius:6}]},
-options:{responsive:true,maintainAspectRatio:false,scales:{y:{min:0,max:10,grid:{color:'#374151'},ticks:{color:'#9ca3af'}},x:{grid:{display:false},ticks:{color:'#e5e7eb',font:{size:10}}}},plugins:{legend:{display:false}}}
+type:'bar',data:{labels,datasets:[{label:'平均分',data:values,backgroundColor:colors,borderRadius:6,borderSkipped:false}]},
+options:{responsive:true,maintainAspectRatio:false,scales:{y:{min:0,max:10,grid:{color:'#e2e8f0'},ticks:{color:'#64748b',font:{size:10}}},x:{grid:{display:false},ticks:{color:'#475569',font:{size:11,weight:'600'}}}},plugins:{legend:{display:false}}}
 });
 }else{barChart.data.datasets[0].data=values;barChart.update();}
 }
@@ -264,8 +347,8 @@ const avg=+(arr.reduce((s,x)=>s+x.v,0)/arr.length).toFixed(1);
 return {name:d.name.split(' ')[0],avg,color:d.color};
 });
 const total=+(items.reduce((s,x)=>s+x.avg,0)/items.length).toFixed(1);
-let html=items.map(it=>`<div class="item"><span class="label" style="color:${it.color}">${it.name}</span><span class="val">${it.avg}</span></div>`).join('');
-html+=`<div class="total"><span>综合评分</span><span style="color:${total<4?'#ef4444':total<7?'#f59e0b':'#10b981'}">${total}</span></div>`;
+let html=items.map(it=>`<div class="summary-item"><span class="label" style="color:${it.color}">${it.name}</span><span class="val ${it.avg<4?'score-low':it.avg<7?'score-mid':'score-high'}">${it.avg}</span></div>`).join('');
+html+=`<div class="summary-total"><span>综合评分</span><span class="${total<4?'score-low':total<7?'score-mid':'score-high'}">${total}</span></div>`;
 document.getElementById('summaryBox').innerHTML=html;
 }
 
@@ -306,7 +389,7 @@ document.getElementById('reportText').value=text;
 document.getElementById('reportModal').classList.add('open');
 }
 function closeModal(){document.getElementById('reportModal').classList.remove('open');}
-function copyReport(){navigator.clipboard.writeText(document.getElementById('reportText').value);alert('已复制');}
+function copyReport(){navigator.clipboard.writeText(document.getElementById('reportText').value);alert('已复制到剪贴板');}
 function downloadReport(){const blob=new Blob([document.getElementById('reportText').value],{type:'text/plain'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=`pestel_report_${Date.now()}.txt`;a.click();URL.revokeObjectURL(url);}
 
 document.getElementById('industrySelect').addEventListener('change',function(){
